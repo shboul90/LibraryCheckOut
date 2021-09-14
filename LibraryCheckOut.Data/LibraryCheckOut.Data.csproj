@@ -104,5 +104,11 @@
       <DependentUpon>202109100130511_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LibraryCheckOut.Models\LibraryCheckOut.Models.csproj">
+      <Project>{B41DF793-71A4-4A7E-ACAA-BA28FEE2B0F1}</Project>
+      <Name>LibraryCheckOut.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
