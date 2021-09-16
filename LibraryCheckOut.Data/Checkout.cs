@@ -12,6 +12,7 @@ namespace LibraryCheckOut.Data
     {
         [Key]
         [Required]
+        public Guid ID { get; set; }
         public int Checkout_Id { get; set; }
         public DateTime CheckoutDate { get; set; }
         public DateTime CheckoutDueDate
