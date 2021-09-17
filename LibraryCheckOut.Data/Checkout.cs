@@ -23,6 +23,7 @@ namespace LibraryCheckOut.Data
                 return dueDate;
             }
         }
+
         [ForeignKey(nameof(Member))]
         [Required]
         public int Member_id { get; set; }
