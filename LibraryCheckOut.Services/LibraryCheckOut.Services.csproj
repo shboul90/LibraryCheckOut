@@ -84,6 +84,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckoutService.cs" />
     <Compile Include="MediaService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
