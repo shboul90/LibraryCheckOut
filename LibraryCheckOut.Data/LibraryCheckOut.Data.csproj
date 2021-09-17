@@ -92,6 +92,10 @@
     <Compile Include="Migrations\202109100130511_Initial.Designer.cs">
       <DependentUpon>202109100130511_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202109162243343_TestingMedias.cs" />
+    <Compile Include="Migrations\202109162243343_TestingMedias.Designer.cs">
+      <DependentUpon>202109162243343_TestingMedias.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -102,6 +106,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202109100130511_Initial.resx">
       <DependentUpon>202109100130511_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109162243343_TestingMedias.resx">
+      <DependentUpon>202109162243343_TestingMedias.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

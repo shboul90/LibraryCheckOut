@@ -207,6 +207,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MediaController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -310,6 +311,14 @@
     <ProjectReference Include="..\LibraryCheckOut.Data\LibraryCheckOut.Data.csproj">
       <Project>{3CFF0130-8AF9-48AC-A9AF-50FDA3148BA8}</Project>
       <Name>LibraryCheckOut.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibraryCheckOut.Models\LibraryCheckOut.Models.csproj">
+      <Project>{B41DF793-71A4-4A7E-ACAA-BA28FEE2B0F1}</Project>
+      <Name>LibraryCheckOut.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibraryCheckOut.Services\LibraryCheckOut.Services.csproj">
+      <Project>{BBBC64A4-333A-4029-B01B-A21710733EB4}</Project>
+      <Name>LibraryCheckOut.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
