@@ -36,5 +36,6 @@ namespace LibraryCheckOut.Data
         public string AddedBy { get; set; }
 
         public string LastUpdatedBy { get; set; }
+
     }
 }
