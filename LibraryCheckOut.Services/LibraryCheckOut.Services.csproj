@@ -96,6 +96,10 @@
       <Project>{3CFF0130-8AF9-48AC-A9AF-50FDA3148BA8}</Project>
       <Name>LibraryCheckOut.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LibraryCheckOut.Models\LibraryCheckOut.Models.csproj">
+      <Project>{B41DF793-71A4-4A7E-ACAA-BA28FEE2B0F1}</Project>
+      <Name>LibraryCheckOut.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

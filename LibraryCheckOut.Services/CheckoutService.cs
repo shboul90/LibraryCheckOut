@@ -1,4 +1,5 @@
 ﻿using LibraryCheckOut.Data;
+using LibraryCheckOut.Models.ENUMs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LibraryCheckOut.Services
 {
-    class CheckoutService
+    public class CheckoutService
     {
         private readonly Guid _userID;
 
@@ -23,7 +24,7 @@ namespace LibraryCheckOut.Services
                 ID = _userID,
                 Checkout_Id = model.Checkout_Id,
                 CheckoutDate = DateTime.Now,
-                Member_Id = model.Member_Id,
+                Member_id = model.Member_id,
                 ListOfItems = model.ListOfItems,
                 TotalNumberOfItems = model.TotalNumberOfItems
             };
@@ -45,12 +46,81 @@ namespace LibraryCheckOut.Services
                                 .Select(e => new Checkout
                                 {
                                     Checkout_Id = e.Checkout_Id,
-                                    Member_Id = e.Member_Id,
+                                    Member_id = e.Member_id,
                                     CheckoutDate = e.CheckoutDate,
                                     TotalNumberOfItems = e.TotalNumberOfItems
                                 });
                 return query.ToList();
 
+            }
+        }
+
+        //public Checkout GetCheckoutsByLastName(string lastName)
+        //{
+        //    using (var ctx = new ApplicationDbContext())
+        //    {
+        //        var entity = ctx
+        //                        .Checkouts
+        //                        .Single(e => e. == lastName && e. == );
+        //        return
+        //          new Checkout
+        //          {
+
+        //          };
+        //    }
+        //}
+
+        public Checkout GetCheckoutsByMediaType(MediaTypes mediaType)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx
+                                .Checkouts
+                                .Single(e => e.Media.MediaType == mediaType && e.ID == _userID);
+                return
+                    new Checkout
+                    {
+                        Checkout_Id = entity.Checkout_Id,
+                        Member_id = entity.Member_id,
+                        CheckoutDate = entity.CheckoutDate,
+                        TotalNumberOfItems = entity.TotalNumberOfItems,
+                    };
+            }
+        }
+
+        public Checkout GetCheckoutsByMediaTitle(string mediaTitle)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx
+                                .Checkouts
+                                .Single(e => e.Media.Title == mediaTitle && e.ID == _userID);
+                return
+                    new Checkout
+                    {
+                        Checkout_Id = entity.Checkout_Id,
+                        Member_id = entity.Member_id,
+                        CheckoutDate = entity.CheckoutDate,
+                        TotalNumberOfItems = entity.TotalNumberOfItems,
+                    };
+            }
+        }
+
+        public Checkout GetCheckoutsByDateOfTransaction(DateTime dateOfTransaction)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx
+                                .Checkouts
+                                .Single(e => e.CheckoutDate == dateOfTransaction && e.ID == _userID);
+                return
+                    new Checkout
+                    {
+                        Checkout_Id = entity.Checkout_Id,
+                        Member_id = entity.Member_id,
+                        CheckoutDate = entity.CheckoutDate,
+                        TotalNumberOfItems = entity.TotalNumberOfItems,
+                    };
             }
         }
     }

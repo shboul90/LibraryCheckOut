@@ -25,11 +25,15 @@ namespace LibraryCheckOut.Data
         }
         [ForeignKey(nameof(Member))]
         [Required]
-        public int Member_Id { get; set; }
+        public int Member_id { get; set; }
+
+        public virtual Member Member { get; set; }
 
         [ForeignKey(nameof(Media))]
         [Required]
-        public List<Media> ListOfItems { get; set; }
+        public List<int> ListOfItems { get; set; }
+
+        public virtual Media Media { get; set; }
         public int TotalNumberOfItems { get; set; }
 
     }
