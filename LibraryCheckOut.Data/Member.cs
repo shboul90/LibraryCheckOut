@@ -12,6 +12,8 @@ namespace LibraryCheckOut.Data
         [Key]
         public int Member_id { get; set; }
         [Required]
+        public Guid OwnerId { get; set; }
+        [Required]
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
@@ -29,5 +31,6 @@ namespace LibraryCheckOut.Data
         public DateTime DateOfMembership { get; set; }
         [Required]
         public string MembershipRating { get; set; }
+        public DateTimeOffset CreatedUtc { get; set; }
     }
 }

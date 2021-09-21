@@ -84,11 +84,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MemberService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LibraryCheckOut.Data\LibraryCheckOut.Data.csproj">
+      <Project>{3cff0130-8af9-48ac-a9af-50fda3148ba8}</Project>
+      <Name>LibraryCheckOut.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibraryCheckOut.Models\LibraryCheckOut.Models.csproj">
+      <Project>{b41df793-71a4-4a7e-acaa-ba28fee2b0f1}</Project>
+      <Name>LibraryCheckOut.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
