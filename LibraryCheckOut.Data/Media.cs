@@ -40,6 +40,7 @@ namespace LibraryCheckOut.Data
         public string AddedBy { get; set; }
 
         public string LastUpdatedBy { get; set; }
+      
         public virtual ICollection<Checkout> CheckoutCollection { get; set; }
     }
 }
