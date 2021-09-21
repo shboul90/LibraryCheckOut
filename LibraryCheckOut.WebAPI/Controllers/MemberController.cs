@@ -20,6 +20,13 @@ namespace LibraryCheckOut.WebAPI.Controllers
             return Ok(members);
         }
 
+        public IHttpActionResult Get(int id)
+        {
+            MemberService memberService = CreateMemberService();
+            var member = memberService.GetMemberById(id);
+            return Ok(member);
+        }
+
         public IHttpActionResult Post(MemberCreate member)
         {
             if (!ModelState.IsValid)
@@ -37,6 +44,29 @@ namespace LibraryCheckOut.WebAPI.Controllers
             var userId = Guid.Parse(User.Identity.GetUserId());
             var memberService = new MemberService(userId);
             return memberService;
+        }
+
+        public IHttpActionResult Put (MemberEdit member)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var service = CreateMemberService();
+
+            if (!service.UpdateMember(member))
+                return InternalServerError();
+
+            return Ok();
+        }
+
+        public IHttpActionResult Delete (int id)
+        {
+            var service = CreateMemberService();
+
+            if (!service.DeleteMember(id))
+                return InternalServerError();
+
+            return Ok();
         }
     }
 }

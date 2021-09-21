@@ -88,6 +88,8 @@
     <Compile Include="ENUMs\MediaTypes.cs" />
     <Compile Include="ENUMs\RatingTypes.cs" />
     <Compile Include="MemberCreate.cs" />
+    <Compile Include="MemberDetail.cs" />
+    <Compile Include="MemberEdit.cs" />
     <Compile Include="MemberListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
