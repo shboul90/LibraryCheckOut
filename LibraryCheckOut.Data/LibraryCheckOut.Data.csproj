@@ -88,21 +88,12 @@
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Media.cs" />
     <Compile Include="Member.cs" />
-    <Compile Include="Migrations\202109100130511_Initial.cs" />
-    <Compile Include="Migrations\202109100130511_Initial.Designer.cs">
-      <DependentUpon>202109100130511_Initial.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202109100130511_Initial.resx">
-      <DependentUpon>202109100130511_Initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LibraryCheckOut.Models\LibraryCheckOut.Models.csproj">
