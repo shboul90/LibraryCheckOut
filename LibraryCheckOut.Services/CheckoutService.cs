@@ -1,4 +1,5 @@
 ﻿using LibraryCheckOut.Data;
+using LibraryCheckOut.Models;
 using LibraryCheckOut.Models.ENUMs;
 using System;
 using System.Collections.Generic;
@@ -17,22 +18,33 @@ namespace LibraryCheckOut.Services
             _userID = userID;
         }
 
-        public bool CreateCheckout(Checkout model)
+        public bool CreateCheckout(CheckoutCreate model)
         {
             var entity = new Checkout()
             {
                 ID = _userID,
-                Checkout_Id = model.Checkout_Id,
                 CheckoutDate = DateTime.Now,
                 Member_id = model.Member_id,
-                ListOfItems = model.ListOfItems,
                 TotalNumberOfItems = model.TotalNumberOfItems
             };
 
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Checkouts.Add(model);
-                return ctx.SaveChanges() == 1;
+                var medias = ctx.Medias.ToList();
+
+                if (medias is null)
+                {
+                    return false;
+                }
+
+                foreach (int mediaListItem in model.MediaList)
+                {
+                    var mediaToAdd = medias.Single(e => e.Media_Id == mediaListItem); //found media item. Will throw an error with no media in database
+                    entity.MediaCollection.Add(mediaToAdd); //added it to list
+                }
+
+                ctx.Checkouts.Add(entity);
+                return ctx.SaveChanges() >= 1; //method that saves changes through database. If no rows were changed, it would return an error
             }
         }
 
@@ -51,7 +63,6 @@ namespace LibraryCheckOut.Services
                                     TotalNumberOfItems = e.TotalNumberOfItems
                                 });
                 return query.ToList();
-
             }
         }
 
@@ -76,7 +87,7 @@ namespace LibraryCheckOut.Services
             {
                 var entity = ctx
                                 .Checkouts
-                                .Single(e => e.Media.MediaType == mediaType && e.ID == _userID);
+                                .Single(e => e.ID == _userID);
                 return
                     new Checkout
                     {
@@ -94,7 +105,7 @@ namespace LibraryCheckOut.Services
             {
                 var entity = ctx
                                 .Checkouts
-                                .Single(e => e.Media.Title == mediaTitle && e.ID == _userID);
+                                .Single(e =>  e.ID == _userID);
                 return
                     new Checkout
                     {

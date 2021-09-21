@@ -7,13 +7,13 @@ namespace LibraryCheckOut.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Initial : IMigrationMetadata
+    public sealed partial class ICollectionsAdded : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ICollectionsAdded));
         
         string IMigrationMetadata.Id
         {
-            get { return "202109100130511_Initial"; }
+            get { return "202109212255211_ICollectionsAdded"; }
         }
         
         string IMigrationMetadata.Source
