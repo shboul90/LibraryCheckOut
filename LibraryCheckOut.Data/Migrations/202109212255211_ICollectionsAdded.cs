@@ -3,7 +3,7 @@ namespace LibraryCheckOut.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class ICollectionsAdded : DbMigration
     {
         public override void Up()
         {
@@ -12,14 +12,32 @@ namespace LibraryCheckOut.Data.Migrations
                 c => new
                     {
                         Checkout_Id = c.Int(nullable: false, identity: true),
+                        ID = c.Guid(nullable: false),
+                        CheckoutDate = c.DateTime(nullable: false),
+                        Member_id = c.Int(nullable: false),
+                        TotalNumberOfItems = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.Checkout_Id);
+                .PrimaryKey(t => t.Checkout_Id)
+                .ForeignKey("dbo.Members", t => t.Member_id, cascadeDelete: true)
+                .Index(t => t.Member_id);
             
             CreateTable(
                 "dbo.Media",
                 c => new
                     {
                         Media_Id = c.Int(nullable: false, identity: true),
+                        MediaType = c.Int(nullable: false),
+                        Title = c.String(),
+                        Author = c.String(),
+                        YearReleased = c.DateTime(nullable: false),
+                        Genre = c.Int(nullable: false),
+                        Rating = c.Int(nullable: false),
+                        Quantity = c.Int(nullable: false),
+                        InstockQuantity = c.Int(nullable: false),
+                        DateAdded = c.DateTime(nullable: false),
+                        LastUpdated = c.DateTime(nullable: false),
+                        AddedBy = c.String(),
+                        LastUpdatedBy = c.String(),
                     })
                 .PrimaryKey(t => t.Media_Id);
             
@@ -99,6 +117,19 @@ namespace LibraryCheckOut.Data.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
+            CreateTable(
+                "dbo.MediaCheckouts",
+                c => new
+                    {
+                        Media_Media_Id = c.Int(nullable: false),
+                        Checkout_Checkout_Id = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Media_Media_Id, t.Checkout_Checkout_Id })
+                .ForeignKey("dbo.Media", t => t.Media_Media_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Checkouts", t => t.Checkout_Checkout_Id, cascadeDelete: true)
+                .Index(t => t.Media_Media_Id)
+                .Index(t => t.Checkout_Checkout_Id);
+            
         }
         
         public override void Down()
@@ -107,12 +138,19 @@ namespace LibraryCheckOut.Data.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Checkouts", "Member_id", "dbo.Members");
+            DropForeignKey("dbo.MediaCheckouts", "Checkout_Checkout_Id", "dbo.Checkouts");
+            DropForeignKey("dbo.MediaCheckouts", "Media_Media_Id", "dbo.Media");
+            DropIndex("dbo.MediaCheckouts", new[] { "Checkout_Checkout_Id" });
+            DropIndex("dbo.MediaCheckouts", new[] { "Media_Media_Id" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Checkouts", new[] { "Member_id" });
+            DropTable("dbo.MediaCheckouts");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");

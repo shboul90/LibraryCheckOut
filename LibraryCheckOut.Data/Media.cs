@@ -10,6 +10,10 @@ namespace LibraryCheckOut.Data
 {
     public class Media
     {
+        public Media()
+        {
+            this.CheckoutCollection = new HashSet<Checkout>();
+        }
         [Key]
         public int Media_Id { get; set; }
 
@@ -36,5 +40,6 @@ namespace LibraryCheckOut.Data
         public string AddedBy { get; set; }
 
         public string LastUpdatedBy { get; set; }
+        public virtual ICollection<Checkout> CheckoutCollection { get; set; }
     }
 }

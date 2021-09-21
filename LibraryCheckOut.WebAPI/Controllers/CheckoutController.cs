@@ -1,4 +1,5 @@
 ﻿using LibraryCheckOut.Data;
+using LibraryCheckOut.Models;
 using LibraryCheckOut.Models.ENUMs;
 using LibraryCheckOut.Services;
 using Microsoft.AspNet.Identity;
@@ -14,7 +15,7 @@ namespace LibraryCheckOut.WebAPI.Controllers
     {
 
         [HttpPost]
-        public IHttpActionResult Post(Checkout transaction)
+        public IHttpActionResult Post(CheckoutCreate transaction)
         {
             if (transaction is null)
                 return BadRequest("Cannot be null");
@@ -31,6 +32,7 @@ namespace LibraryCheckOut.WebAPI.Controllers
         }
 
         [HttpGet]
+        //[Route("Checkout/GetAll")]
         public IHttpActionResult GetAll()
         {
             CheckoutService checkoutService = CreateCheckoutService();
@@ -52,6 +54,7 @@ namespace LibraryCheckOut.WebAPI.Controllers
         //    return Ok(checkouts);
         //}
 
+        [HttpGet]
         public IHttpActionResult GetByMediaTitle(string mediaTitle)
         {
             CheckoutService checkoutService = CreateCheckoutService();
@@ -59,6 +62,7 @@ namespace LibraryCheckOut.WebAPI.Controllers
             return Ok(checkouts);
         }
 
+        [HttpGet]
         public IHttpActionResult GetByDateOfCheckout(DateTime dateTime)
         {
             CheckoutService checkoutService = CreateCheckoutService();
@@ -66,7 +70,7 @@ namespace LibraryCheckOut.WebAPI.Controllers
             return Ok(checkouts);
         }
 
-        public CheckoutService CreateCheckoutService()
+        private CheckoutService CreateCheckoutService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var checkoutService = new CheckoutService(userId);

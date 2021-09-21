@@ -10,10 +10,14 @@ namespace LibraryCheckOut.Data
 {
     public class Checkout
     {
+        public Checkout()
+        {
+            this.MediaCollection = new HashSet<Media>();
+        }
         [Key]
+        public int Checkout_Id { get; set; }
         [Required]
         public Guid ID { get; set; }
-        public int Checkout_Id { get; set; }
         public DateTime CheckoutDate { get; set; }
         public DateTime CheckoutDueDate
         {
@@ -30,11 +34,12 @@ namespace LibraryCheckOut.Data
 
         public virtual Member Member { get; set; }
 
-        [ForeignKey(nameof(Media))]
-        [Required]
-        public List<int> ListOfItems { get; set; }
+        //[ForeignKey(nameof(Media))] ---- foreign keys used when there is one item being referenced
+       // [Required]
+       // public List<int> ListOfItems { get; set; }
 
-        public virtual Media Media { get; set; }
+       // public virtual Media Media { get; set; }
+        public virtual ICollection<Media> MediaCollection { get; set; }
         public int TotalNumberOfItems { get; set; }
 
     }
