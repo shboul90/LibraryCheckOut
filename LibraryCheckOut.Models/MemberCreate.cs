@@ -9,7 +9,7 @@ namespace LibraryCheckOut.Models
 {
     public class MemberCreate
     {
-        [Requ]
+        [Required]
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }

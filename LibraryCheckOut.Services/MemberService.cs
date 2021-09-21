@@ -115,7 +115,7 @@ namespace LibraryCheckOut.Services
             }
         }
 
-        public bool DeleteNote(int memberId)
+        public bool DeleteMember(int memberId)
         {
             using (var ctx = new ApplicationDbContext())
             {
