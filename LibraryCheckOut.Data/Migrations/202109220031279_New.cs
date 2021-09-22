@@ -3,12 +3,12 @@ namespace LibraryCheckOut.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ICollectionsAdded : DbMigration
+    public partial class New : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.Checkouts",
+                "dbo.Checkout",
                 c => new
                     {
                         Checkout_Id = c.Int(nullable: false, identity: true),
@@ -18,7 +18,7 @@ namespace LibraryCheckOut.Data.Migrations
                         TotalNumberOfItems = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Checkout_Id)
-                .ForeignKey("dbo.Members", t => t.Member_id, cascadeDelete: true)
+                .ForeignKey("dbo.Member", t => t.Member_id, cascadeDelete: true)
                 .Index(t => t.Member_id);
             
             CreateTable(
@@ -42,42 +42,55 @@ namespace LibraryCheckOut.Data.Migrations
                 .PrimaryKey(t => t.Media_Id);
             
             CreateTable(
-                "dbo.Members",
+                "dbo.Member",
                 c => new
                     {
                         Member_id = c.Int(nullable: false, identity: true),
+                        OwnerId = c.Guid(nullable: false),
+                        FirstName = c.String(nullable: false),
+                        LastName = c.String(nullable: false),
+                        StreetAddress = c.String(nullable: false),
+                        City = c.String(nullable: false),
+                        State = c.String(nullable: false),
+                        Zip = c.String(nullable: false),
+                        PhoneNumber = c.String(nullable: false),
+                        DateOfMembership = c.DateTime(nullable: false),
+                        MembershipRating = c.String(nullable: false),
+                        CreatedUtc = c.DateTimeOffset(nullable: false, precision: 7),
+                        ModifiedUtc = c.DateTimeOffset(precision: 7),
                     })
                 .PrimaryKey(t => t.Member_id);
             
             CreateTable(
-                "dbo.AspNetRoles",
+                "dbo.IdentityRole",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(nullable: false, maxLength: 256),
+                        Name = c.String(),
                     })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.AspNetUserRoles",
+                "dbo.IdentityUserRole",
                 c => new
                     {
                         UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(nullable: false, maxLength: 128),
+                        RoleId = c.String(),
+                        IdentityRole_Id = c.String(maxLength: 128),
+                        ApplicationUser_Id = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId)
-                .Index(t => t.RoleId);
+                .PrimaryKey(t => t.UserId)
+                .ForeignKey("dbo.IdentityRole", t => t.IdentityRole_Id)
+                .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUser_Id)
+                .Index(t => t.IdentityRole_Id)
+                .Index(t => t.ApplicationUser_Id);
             
             CreateTable(
-                "dbo.AspNetUsers",
+                "dbo.ApplicationUser",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        Email = c.String(maxLength: 256),
+                        Email = c.String(),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
                         SecurityStamp = c.String(),
@@ -87,38 +100,39 @@ namespace LibraryCheckOut.Data.Migrations
                         LockoutEndDateUtc = c.DateTime(),
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
-                        UserName = c.String(nullable: false, maxLength: 256),
+                        UserName = c.String(),
                     })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.AspNetUserClaims",
+                "dbo.IdentityUserClaim",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        UserId = c.String(nullable: false, maxLength: 128),
+                        UserId = c.String(),
                         ClaimType = c.String(),
                         ClaimValue = c.String(),
+                        ApplicationUser_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
+                .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUser_Id)
+                .Index(t => t.ApplicationUser_Id);
             
             CreateTable(
-                "dbo.AspNetUserLogins",
+                "dbo.IdentityUserLogin",
                 c => new
                     {
-                        LoginProvider = c.String(nullable: false, maxLength: 128),
-                        ProviderKey = c.String(nullable: false, maxLength: 128),
                         UserId = c.String(nullable: false, maxLength: 128),
+                        LoginProvider = c.String(),
+                        ProviderKey = c.String(),
+                        ApplicationUser_Id = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
+                .PrimaryKey(t => t.UserId)
+                .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUser_Id)
+                .Index(t => t.ApplicationUser_Id);
             
             CreateTable(
-                "dbo.MediaCheckouts",
+                "dbo.MediaCheckout",
                 c => new
                     {
                         Media_Media_Id = c.Int(nullable: false),
@@ -126,7 +140,7 @@ namespace LibraryCheckOut.Data.Migrations
                     })
                 .PrimaryKey(t => new { t.Media_Media_Id, t.Checkout_Checkout_Id })
                 .ForeignKey("dbo.Media", t => t.Media_Media_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Checkouts", t => t.Checkout_Checkout_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Checkout", t => t.Checkout_Checkout_Id, cascadeDelete: true)
                 .Index(t => t.Media_Media_Id)
                 .Index(t => t.Checkout_Checkout_Id);
             
@@ -134,31 +148,29 @@ namespace LibraryCheckOut.Data.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Checkouts", "Member_id", "dbo.Members");
-            DropForeignKey("dbo.MediaCheckouts", "Checkout_Checkout_Id", "dbo.Checkouts");
-            DropForeignKey("dbo.MediaCheckouts", "Media_Media_Id", "dbo.Media");
-            DropIndex("dbo.MediaCheckouts", new[] { "Checkout_Checkout_Id" });
-            DropIndex("dbo.MediaCheckouts", new[] { "Media_Media_Id" });
-            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
-            DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
-            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Checkouts", new[] { "Member_id" });
-            DropTable("dbo.MediaCheckouts");
-            DropTable("dbo.AspNetUserLogins");
-            DropTable("dbo.AspNetUserClaims");
-            DropTable("dbo.AspNetUsers");
-            DropTable("dbo.AspNetUserRoles");
-            DropTable("dbo.AspNetRoles");
-            DropTable("dbo.Members");
+            DropForeignKey("dbo.IdentityUserRole", "ApplicationUser_Id", "dbo.ApplicationUser");
+            DropForeignKey("dbo.IdentityUserLogin", "ApplicationUser_Id", "dbo.ApplicationUser");
+            DropForeignKey("dbo.IdentityUserClaim", "ApplicationUser_Id", "dbo.ApplicationUser");
+            DropForeignKey("dbo.IdentityUserRole", "IdentityRole_Id", "dbo.IdentityRole");
+            DropForeignKey("dbo.Checkout", "Member_id", "dbo.Member");
+            DropForeignKey("dbo.MediaCheckout", "Checkout_Checkout_Id", "dbo.Checkout");
+            DropForeignKey("dbo.MediaCheckout", "Media_Media_Id", "dbo.Media");
+            DropIndex("dbo.MediaCheckout", new[] { "Checkout_Checkout_Id" });
+            DropIndex("dbo.MediaCheckout", new[] { "Media_Media_Id" });
+            DropIndex("dbo.IdentityUserLogin", new[] { "ApplicationUser_Id" });
+            DropIndex("dbo.IdentityUserClaim", new[] { "ApplicationUser_Id" });
+            DropIndex("dbo.IdentityUserRole", new[] { "ApplicationUser_Id" });
+            DropIndex("dbo.IdentityUserRole", new[] { "IdentityRole_Id" });
+            DropIndex("dbo.Checkout", new[] { "Member_id" });
+            DropTable("dbo.MediaCheckout");
+            DropTable("dbo.IdentityUserLogin");
+            DropTable("dbo.IdentityUserClaim");
+            DropTable("dbo.ApplicationUser");
+            DropTable("dbo.IdentityUserRole");
+            DropTable("dbo.IdentityRole");
+            DropTable("dbo.Member");
             DropTable("dbo.Media");
-            DropTable("dbo.Checkouts");
+            DropTable("dbo.Checkout");
         }
     }
 }
