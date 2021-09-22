@@ -1,21 +1,15 @@
 ﻿using LibraryCheckOut.Models.ENUMs;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryCheckOut.Data
+namespace LibraryCheckOut.Models
 {
-    public class Media
+    public class MediaList
     {
-        public Media()
-        {
-            this.CheckoutCollection = new HashSet<Checkout>();
-        }
-        [Key]
-        public int Media_Id { get; set; }
+        public int MediaId { get; set; }
 
         public MediaTypes MediaType { get; set; }
 
@@ -29,7 +23,7 @@ namespace LibraryCheckOut.Data
 
         public RatingTypes Rating { get; set; }
 
-        public int Quantity { get; set; }
+        public int OverallQuantity { get; set; }
 
         public int InstockQuantity { get; set; }
 
@@ -40,7 +34,5 @@ namespace LibraryCheckOut.Data
         public string AddedBy { get; set; }
 
         public string LastUpdatedBy { get; set; }
-      
-        public virtual ICollection<Checkout> CheckoutCollection { get; set; }
     }
 }

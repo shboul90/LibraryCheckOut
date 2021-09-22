@@ -84,13 +84,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckoutCreate.cs" />
     <Compile Include="ENUMs\GenreTypes.cs" />
     <Compile Include="ENUMs\MediaTypes.cs" />
     <Compile Include="ENUMs\RatingTypes.cs" />
-    <Compile Include="MemberCreate.cs" />
-    <Compile Include="MemberDetail.cs" />
-    <Compile Include="MemberEdit.cs" />
-    <Compile Include="MemberListItem.cs" />
+    <Compile Include="MediaCreate.cs" />
+    <Compile Include="MediaList.cs" />
+    <Compile Include="MediaQuantityUpdate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
