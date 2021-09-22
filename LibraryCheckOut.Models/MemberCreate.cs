@@ -5,14 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryCheckOut.Data
+namespace LibraryCheckOut.Models
 {
-    public class Member
+    public class MemberCreate
     {
-        [Key]
-        public int Member_id { get; set; }
-        [Required]
-        public Guid OwnerId { get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]
@@ -31,7 +27,5 @@ namespace LibraryCheckOut.Data
         public DateTime DateOfMembership { get; set; }
         [Required]
         public string MembershipRating { get; set; }
-        public DateTimeOffset CreatedUtc { get; set; }
-        public DateTimeOffset? ModifiedUtc { get; set; }
     }
 }
