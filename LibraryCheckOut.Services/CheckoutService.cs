@@ -102,36 +102,6 @@ namespace LibraryCheckOut.Services
                                 );
 
                 return entity.ToList();
-
-                
-
-
-                ////    var checkouts = ctx.Checkouts.ToList();
-
-                ////    if (checkouts is null)
-                ////    {
-                ////        return null;
-                ////    }
-
-                ////    List<CheckoutList> checkoutMediaTypeList = new List<CheckoutList>();
-
-                ////    foreach (Checkout media in checkouts)
-                ////    {
-                ////        if (media. == genreType)
-                ////        {
-                ////            CheckoutList mediaListToAdd = new CheckoutList
-                ////            {
-
-                ////            };
-
-                ////            checkoutMediaTypeList.Add(mediaListToAdd);
-                ////        }
-                ////    }
-
-                ////    return checkoutMediaTypeList;
-                ////}
-
-
             }
         }
 

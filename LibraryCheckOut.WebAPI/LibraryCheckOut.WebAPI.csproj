@@ -311,16 +311,19 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\LibraryCheckOut.Data\LibraryCheckOut.Data.csproj">
-      <Project>{3CFF0130-8AF9-48AC-A9AF-50FDA3148BA8}</Project>
+      <Project>{3cff0130-8af9-48ac-a9af-50fda3148ba8}</Project>
       <Name>LibraryCheckOut.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\LibraryCheckOut.Models\LibraryCheckOut.Models.csproj">
-      <Project>{B41DF793-71A4-4A7E-ACAA-BA28FEE2B0F1}</Project>
+      <Project>{b41df793-71a4-4a7e-acaa-ba28fee2b0f1}</Project>
       <Name>LibraryCheckOut.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\LibraryCheckOut.Services\LibraryCheckOut.Services.csproj">
-      <Project>{BBBC64A4-333A-4029-B01B-A21710733EB4}</Project>
+      <Project>{bbbc64a4-333a-4029-b01b-a21710733eb4}</Project>
       <Name>LibraryCheckOut.Services</Name>
     </ProjectReference>
   </ItemGroup>
