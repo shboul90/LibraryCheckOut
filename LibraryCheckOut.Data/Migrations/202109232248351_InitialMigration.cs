@@ -55,7 +55,7 @@ namespace LibraryCheckOut.Data.Migrations
                         Zip = c.String(nullable: false),
                         PhoneNumber = c.String(nullable: false),
                         DateOfMembership = c.DateTime(nullable: false),
-                        MembershipRating = c.String(nullable: false),
+                        MembershipRating = c.Int(nullable: false),
                         CreatedUtc = c.DateTimeOffset(nullable: false, precision: 7),
                         ModifiedUtc = c.DateTimeOffset(precision: 7),
                     })

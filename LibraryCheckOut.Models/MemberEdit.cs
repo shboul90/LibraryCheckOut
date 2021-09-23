@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryCheckOut.Models.ENUMs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -28,6 +29,6 @@ namespace LibraryCheckOut.Models
         [Required]
         public DateTime DateOfMembership { get; set; }
         [Required]
-        public string MembershipRating { get; set; }
+        public RatingTypes MembershipRating { get; set; }
     }
 }

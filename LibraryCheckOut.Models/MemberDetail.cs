@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryCheckOut.Models.ENUMs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace LibraryCheckOut.Models
         public string Zip { get; set; }
         public string PhoneNumber { get; set; }
         public DateTime DateOfMembership { get; set; }
-        public string MembershipRating { get; set; }
+        public RatingTypes MembershipRating { get; set; }
         [Display(Name="Created")]
         public DateTimeOffset CreatedUtc { get; set; }
         [Display(Name="Modified")]
