@@ -40,19 +40,21 @@ namespace LibraryCheckOut.WebAPI.Controllers
             return Ok(checkouts);
         }
 
-        //public IHttpActionResult GetByLastName(string lastName)
-        //{
-        //    CheckoutService checkoutService = CreateCheckoutService();
-        //    var checkouts = checkoutService.GetCheckoutsByLastName(lastName);
-        //    return Ok(checkouts);
-        //}
+        [HttpGet]
+        public IHttpActionResult GetByLastName(string lastName)
+        {
+            CheckoutService checkoutService = CreateCheckoutService();
+            var checkouts = checkoutService.GetCheckoutsByLastName(lastName);
+            return Ok(checkouts);
+        }
 
-        //public IHttpActionResult GetByMediaType(string mediaType)
-        //{
-        //    CheckoutService checkoutService = CreateCheckoutService();
-        //    var checkouts = checkoutService.GetCheckoutsByMediaType(mediaType);
-        //    return Ok(checkouts);
-        //}
+        [HttpGet]
+        public IHttpActionResult GetByMediaType(MediaTypes mediaType)
+        {
+            CheckoutService checkoutService = CreateCheckoutService();
+            var checkouts = checkoutService.GetCheckoutsByMediaType(mediaType);
+            return Ok(checkouts);
+        }
 
         [HttpGet]
         public IHttpActionResult GetByMediaTitle(string mediaTitle)
