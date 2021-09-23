@@ -88,9 +88,9 @@
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Media.cs" />
     <Compile Include="Member.cs" />
-    <Compile Include="Migrations\202109220031279_New.cs" />
-    <Compile Include="Migrations\202109220031279_New.Designer.cs">
-      <DependentUpon>202109220031279_New.cs</DependentUpon>
+    <Compile Include="Migrations\202109232001385_InitialMigration.cs" />
+    <Compile Include="Migrations\202109232001385_InitialMigration.Designer.cs">
+      <DependentUpon>202109232001385_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -106,8 +106,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202109220031279_New.resx">
-      <DependentUpon>202109220031279_New.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202109232001385_InitialMigration.resx">
+      <DependentUpon>202109232001385_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
