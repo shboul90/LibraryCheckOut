@@ -92,6 +92,10 @@
     <Compile Include="MediaCreate.cs" />
     <Compile Include="MediaList.cs" />
     <Compile Include="MediaQuantityUpdate.cs" />
+    <Compile Include="MemberCreate.cs" />
+    <Compile Include="MemberDetail.cs" />
+    <Compile Include="MemberEdit.cs" />
+    <Compile Include="MemberListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
