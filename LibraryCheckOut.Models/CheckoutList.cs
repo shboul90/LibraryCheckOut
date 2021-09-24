@@ -21,6 +21,7 @@ namespace LibraryCheckOut.Models
             }
         }
     public int Member_id { get; set; }
-        public ICollection<int> ListOfItems { get; set; }
+
+    public ICollection<int> ListOfItems { get; set; }
     }
 }

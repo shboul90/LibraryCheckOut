@@ -60,6 +60,7 @@ namespace LibraryCheckOut.Services
                                     Checkout_Id = e.Checkout_Id,
                                     Member_id = e.Member_id,
                                     CheckoutDate = e.CheckoutDate,
+                                    ListOfItems = e.MediaCollection.Select(t => t.Media_Id).ToList()
                                 }
                                 );
                 return query.ToList();
