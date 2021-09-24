@@ -60,7 +60,7 @@ namespace LibraryCheckOut.Services
                                     Checkout_Id = e.Checkout_Id,
                                     Member_id = e.Member_id,
                                     CheckoutDate = e.CheckoutDate,
-                                    ListOfItems = e.MediaCollection.Select(t => t.Media_Id).ToList()
+                                    ListOfItems = e.MediaCollection.ToList().Select(t => t.Media_Id)
                                 }
                                 );
                 return query.ToList();
@@ -78,6 +78,7 @@ namespace LibraryCheckOut.Services
                                             Checkout_Id = e.Checkout_Id,
                                             CheckoutDate = e.CheckoutDate,
                                             Member_id = e.Member_id,
+                                            ListOfItems = e.MediaCollection.ToList().Select(t => t.Media_Id)
                                         }
                                         );
 
@@ -98,6 +99,7 @@ namespace LibraryCheckOut.Services
                                     Checkout_Id = e.Checkout_Id,
                                     Member_id = e.Member_id,
                                     CheckoutDate = e.CheckoutDate,
+                                    ListOfItems = e.MediaCollection.ToList().Select(t => t.Media_Id)
                                 }
                                 );
 
@@ -116,6 +118,7 @@ namespace LibraryCheckOut.Services
                                             Checkout_Id = e.Checkout_Id,
                                             CheckoutDate = e.CheckoutDate,
                                             Member_id = e.Member_id,
+                                            ListOfItems = e.MediaCollection.ToList().Select(t => t.Media_Id)
                                         }
                                         );
 
@@ -134,7 +137,8 @@ namespace LibraryCheckOut.Services
                                      Checkout_Id = e.Checkout_Id,
                                      Member_id = e.Member_id,
                                      CheckoutDate = e.CheckoutDate,
-                                 });
+                                    ListOfItems = e.MediaCollection.ToList().Select(t => t.Media_Id)
+                                });
 
                 return entity.ToList();
             }

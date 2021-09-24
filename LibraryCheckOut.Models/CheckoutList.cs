@@ -12,7 +12,7 @@ namespace LibraryCheckOut.Models
         [Required]
         public int Checkout_Id { get; set; }
         public DateTime CheckoutDate { get; set; }
-        public DateTime CheckoutDueDate //{ get; set; }
+        public DateTime CheckoutDueDate
         {
             get
             {
@@ -20,8 +20,7 @@ namespace LibraryCheckOut.Models
                 return dueDate;
             }
         }
-    public int Member_id { get; set; }
-
-    public ICollection<int> ListOfItems { get; set; }
+        public int Member_id { get; set; }
+        public IEnumerable<int> ListOfItems { get; set; }
+        }
     }
-}
