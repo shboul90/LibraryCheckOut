@@ -3,7 +3,7 @@ namespace LibraryCheckOut.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialMigration : DbMigration
+    public partial class initialMigration : DbMigration
     {
         public override void Up()
         {
@@ -16,10 +16,16 @@ namespace LibraryCheckOut.Data.Migrations
                         CheckoutDate = c.DateTime(nullable: false),
                         Member_id = c.Int(nullable: false),
                         TotalNumberOfItems = c.Int(nullable: false),
+                        Media_Media_Id = c.Int(),
+                        Media_Media_Id1 = c.Int(),
                     })
                 .PrimaryKey(t => t.Checkout_Id)
+                .ForeignKey("dbo.Media", t => t.Media_Media_Id)
+                .ForeignKey("dbo.Media", t => t.Media_Media_Id1)
                 .ForeignKey("dbo.Member", t => t.Member_id, cascadeDelete: true)
-                .Index(t => t.Member_id);
+                .Index(t => t.Member_id)
+                .Index(t => t.Media_Media_Id)
+                .Index(t => t.Media_Media_Id1);
             
             CreateTable(
                 "dbo.Media",
@@ -38,8 +44,11 @@ namespace LibraryCheckOut.Data.Migrations
                         LastUpdated = c.DateTime(nullable: false),
                         AddedBy = c.String(),
                         LastUpdatedBy = c.String(),
+                        Checkout_Checkout_Id = c.Int(),
                     })
-                .PrimaryKey(t => t.Media_Id);
+                .PrimaryKey(t => t.Media_Id)
+                .ForeignKey("dbo.Checkout", t => t.Checkout_Checkout_Id)
+                .Index(t => t.Checkout_Checkout_Id);
             
             CreateTable(
                 "dbo.Member",
@@ -131,19 +140,6 @@ namespace LibraryCheckOut.Data.Migrations
                 .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUser_Id)
                 .Index(t => t.ApplicationUser_Id);
             
-            CreateTable(
-                "dbo.MediaCheckout",
-                c => new
-                    {
-                        Media_Media_Id = c.Int(nullable: false),
-                        Checkout_Checkout_Id = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.Media_Media_Id, t.Checkout_Checkout_Id })
-                .ForeignKey("dbo.Media", t => t.Media_Media_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Checkout", t => t.Checkout_Checkout_Id, cascadeDelete: true)
-                .Index(t => t.Media_Media_Id)
-                .Index(t => t.Checkout_Checkout_Id);
-            
         }
         
         public override void Down()
@@ -153,16 +149,17 @@ namespace LibraryCheckOut.Data.Migrations
             DropForeignKey("dbo.IdentityUserClaim", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserRole", "IdentityRole_Id", "dbo.IdentityRole");
             DropForeignKey("dbo.Checkout", "Member_id", "dbo.Member");
-            DropForeignKey("dbo.MediaCheckout", "Checkout_Checkout_Id", "dbo.Checkout");
-            DropForeignKey("dbo.MediaCheckout", "Media_Media_Id", "dbo.Media");
-            DropIndex("dbo.MediaCheckout", new[] { "Checkout_Checkout_Id" });
-            DropIndex("dbo.MediaCheckout", new[] { "Media_Media_Id" });
+            DropForeignKey("dbo.Media", "Checkout_Checkout_Id", "dbo.Checkout");
+            DropForeignKey("dbo.Checkout", "Media_Media_Id1", "dbo.Media");
+            DropForeignKey("dbo.Checkout", "Media_Media_Id", "dbo.Media");
             DropIndex("dbo.IdentityUserLogin", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserClaim", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserRole", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserRole", new[] { "IdentityRole_Id" });
+            DropIndex("dbo.Media", new[] { "Checkout_Checkout_Id" });
+            DropIndex("dbo.Checkout", new[] { "Media_Media_Id1" });
+            DropIndex("dbo.Checkout", new[] { "Media_Media_Id" });
             DropIndex("dbo.Checkout", new[] { "Member_id" });
-            DropTable("dbo.MediaCheckout");
             DropTable("dbo.IdentityUserLogin");
             DropTable("dbo.IdentityUserClaim");
             DropTable("dbo.ApplicationUser");

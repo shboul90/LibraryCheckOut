@@ -48,20 +48,20 @@ namespace LibraryCheckOut.Services
             }
         }
 
-        public IEnumerable<Checkout> GetAllCheckouts()
+        public List<CheckoutList> GetAllCheckouts()
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query = ctx
                                 .Checkouts
                                 .Where(e => e.ID == _userID)
-                                .Select(e => new Checkout
+                                .Select(e => new CheckoutList
                                 {
                                     Checkout_Id = e.Checkout_Id,
                                     Member_id = e.Member_id,
                                     CheckoutDate = e.CheckoutDate,
-                                    TotalNumberOfItems = e.TotalNumberOfItems
-                                });
+                                }
+                                );
                 return query.ToList();
             }
         }
@@ -76,7 +76,6 @@ namespace LibraryCheckOut.Services
                                         { 
                                             Checkout_Id = e.Checkout_Id,
                                             CheckoutDate = e.CheckoutDate,
-                                            CheckoutDueDate = e.CheckoutDate.AddDays(7),
                                             Member_id = e.Member_id,
                                         }
                                         );
@@ -110,12 +109,11 @@ namespace LibraryCheckOut.Services
             using (var ctx = new ApplicationDbContext())
             {
                 var listItemToShow = ctx.Checkouts
-                                        .Where(e => e.Member.LastName == mediaTitle)
+                                        .Where(e => e.Media.Title == mediaTitle)
                                         .Select(e => new CheckoutList
                                         {
                                             Checkout_Id = e.Checkout_Id,
                                             CheckoutDate = e.CheckoutDate,
-                                            CheckoutDueDate = e.CheckoutDate.AddDays(7),
                                             Member_id = e.Member_id,
                                         }
                                         );

@@ -12,15 +12,15 @@ namespace LibraryCheckOut.Models
         [Required]
         public int Checkout_Id { get; set; }
         public DateTime CheckoutDate { get; set; }
-        public DateTime CheckoutDueDate { get; set; }
-        //{
-        //    get
-        //    {
-        //        DateTime dueDate = CheckoutDate.AddDays(7);
-        //        return dueDate;
-        //    }
-        //}
-        public int Member_id { get; set; }
-        public List<int> ListOfItems { get; set; }
+        public DateTime CheckoutDueDate //{ get; set; }
+        {
+            get
+            {
+                DateTime dueDate = CheckoutDate.AddDays(7);
+                return dueDate;
+            }
+        }
+    public int Member_id { get; set; }
+        public ICollection<int> ListOfItems { get; set; }
     }
 }
