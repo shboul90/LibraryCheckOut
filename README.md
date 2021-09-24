@@ -38,6 +38,7 @@ For each data class referenced above the following entities exist:
         DateTimeOffset? ModifiedUtc
 
 2. Media:
+
 	int Media_Id
 
 	MediaTypes MediaType
@@ -67,6 +68,7 @@ For each data class referenced above the following entities exist:
 	virtual ICollection<Checkout> CheckoutCollection
 
 3. Checkout:
+	
         int Checkout_Id
         
         Guid ID
