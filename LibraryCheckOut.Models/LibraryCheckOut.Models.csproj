@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheckoutCreate.cs" />
+    <Compile Include="CheckoutList.cs" />
     <Compile Include="ENUMs\GenreTypes.cs" />
     <Compile Include="ENUMs\MediaTypes.cs" />
     <Compile Include="ENUMs\RatingTypes.cs" />

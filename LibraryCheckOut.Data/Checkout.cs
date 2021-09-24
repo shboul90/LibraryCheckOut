@@ -35,10 +35,10 @@ namespace LibraryCheckOut.Data
         public virtual Member Member { get; set; }
 
         //[ForeignKey(nameof(Media))] ---- foreign keys used when there is one item being referenced
-       // [Required]
+
        // public List<int> ListOfItems { get; set; }
 
-       // public virtual Media Media { get; set; }
+        public virtual Media Media { get; set; }
         public virtual ICollection<Media> MediaCollection { get; set; }
         public int TotalNumberOfItems { get; set; }
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LibraryCheckOut.Models
 {
-    public class CheckoutCreate
+    public class CheckoutCreate //what we want the user to provide
     {
         [Required]
         public int Member_id { get; set; }

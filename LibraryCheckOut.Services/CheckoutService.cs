@@ -66,72 +66,78 @@ namespace LibraryCheckOut.Services
             }
         }
 
-        //public Checkout GetCheckoutsByLastName(string lastName)
-        //{
-        //    using (var ctx = new ApplicationDbContext())
-        //    {
-        //        var entity = ctx
-        //                        .Checkouts
-        //                        .Single(e => e. == lastName && e. == );
-        //        return
-        //          new Checkout
-        //          {
-
-        //          };
-        //    }
-        //}
-
-        public Checkout GetCheckoutsByMediaType(MediaTypes mediaType)
+        public IEnumerable<CheckoutList> GetCheckoutsByLastName(string lastName)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx
-                                .Checkouts
-                                .Single(e => e.ID == _userID);
-                return
-                    new Checkout
-                    {
-                        Checkout_Id = entity.Checkout_Id,
-                        Member_id = entity.Member_id,
-                        CheckoutDate = entity.CheckoutDate,
-                        TotalNumberOfItems = entity.TotalNumberOfItems,
-                    };
+                var listItemToShow = ctx.Checkouts
+                                        .Where(e => e.Member.LastName == lastName)
+                                        .Select(e => new CheckoutList 
+                                        { 
+                                            Checkout_Id = e.Checkout_Id,
+                                            CheckoutDate = e.CheckoutDate,
+                                            CheckoutDueDate = e.CheckoutDate.AddDays(7),
+                                            Member_id = e.Member_id,
+                                        }
+                                        );
+
+                    return listItemToShow.ToList();
             }
         }
 
-        public Checkout GetCheckoutsByMediaTitle(string mediaTitle)
+        public List<CheckoutList> GetCheckoutsByMediaType(MediaTypes mediaType)
         {
             using (var ctx = new ApplicationDbContext())
             {
+
                 var entity = ctx
                                 .Checkouts
-                                .Single(e =>  e.ID == _userID);
-                return
-                    new Checkout
-                    {
-                        Checkout_Id = entity.Checkout_Id,
-                        Member_id = entity.Member_id,
-                        CheckoutDate = entity.CheckoutDate,
-                        TotalNumberOfItems = entity.TotalNumberOfItems,
-                    };
+                                .Where(e => e.Media.MediaType == mediaType)
+                                .Select(e => new CheckoutList
+                                {
+                                    Checkout_Id = e.Checkout_Id,
+                                    Member_id = e.Member_id,
+                                    CheckoutDate = e.CheckoutDate,
+                                }
+                                );
+
+                return entity.ToList();
             }
         }
 
-        public Checkout GetCheckoutsByDateOfTransaction(DateTime dateOfTransaction)
+        public IEnumerable<CheckoutList> GetCheckoutsByMediaTitle(string mediaTitle)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx
-                                .Checkouts
-                                .Single(e => e.CheckoutDate == dateOfTransaction && e.ID == _userID);
-                return
-                    new Checkout
-                    {
-                        Checkout_Id = entity.Checkout_Id,
-                        Member_id = entity.Member_id,
-                        CheckoutDate = entity.CheckoutDate,
-                        TotalNumberOfItems = entity.TotalNumberOfItems,
-                    };
+                var listItemToShow = ctx.Checkouts
+                                        .Where(e => e.Member.LastName == mediaTitle)
+                                        .Select(e => new CheckoutList
+                                        {
+                                            Checkout_Id = e.Checkout_Id,
+                                            CheckoutDate = e.CheckoutDate,
+                                            CheckoutDueDate = e.CheckoutDate.AddDays(7),
+                                            Member_id = e.Member_id,
+                                        }
+                                        );
+
+                return listItemToShow.ToList();
+            }
+        }
+
+        public IEnumerable<CheckoutList> GetCheckoutsByDateOfTransaction(DateTime dateOfTransaction)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Checkouts
+                                .Where(e => e.CheckoutDate == dateOfTransaction)
+                                .Select(e => new CheckoutList
+                                 {
+                                     Checkout_Id = e.Checkout_Id,
+                                     Member_id = e.Member_id,
+                                     CheckoutDate = e.CheckoutDate,
+                                 });
+
+                return entity.ToList();
             }
         }
     }
